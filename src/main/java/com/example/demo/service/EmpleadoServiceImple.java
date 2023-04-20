@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.IEmpleadoDAO;
 import com.example.demo.dto.Empleado;
+import com.example.demo.dto.Trabajo;
 
 /**
  * 
@@ -39,12 +40,21 @@ public class EmpleadoServiceImple implements IEmpleadoService {
 		return iEmpleadoDAO.findById(id).get();
 	}
 
-//	@Override
-//	public List<Empleado> listarEmpleadoNombre(String nombre) {
-//
-//		return iEmpleadoDAO.buscarPorNombre(nombre);
-//
-//	}
+	@Override
+	public List<Empleado> listarEmpleadoNombre(String nombre) {
+
+		return iEmpleadoDAO.findByNombre(nombre);
+
+	}
+	
+	@Override
+	public List<Empleado> listarEmpleadoPorTrabajo(Trabajo trabajo) {
+		List<Empleado> empleados = iEmpleadoDAO.findByTrabajo(trabajo);
+	    for (Empleado empleado : empleados) {
+	        empleado.setSalario(trabajo.getSalario());
+	    }
+	    return empleados;
+	}
 
 	@Override
 	public Empleado actualizarEmpleado(Empleado empleado) {

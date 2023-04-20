@@ -1,12 +1,4 @@
-/*Primero ponemos un DROP para que elimine y vuelva a cargar la base de datos 
-en caso de que ya exista*/
-/*DROP DATABASE IF EXISTS data;*/
-
-/*Creamos la base de datos*/
-/*CREATE DATABASE data;*/
-
-/*Entramos en la base de datos*/
-/*USE data;/*
+DROP table IF EXISTS empleado;
 
 /*Creamos la tabla empleado*/
 CREATE table empleado(
@@ -17,7 +9,6 @@ CREATE table empleado(
 );
 
 /*Insertamos los los datos del empleado*/
-insert into empleado(nombre, trabajo, salario)values('Alberto','Programador',2000);
-insert into empleado(nombre, trabajo, salario)values('Andrea','Analista',1800);
-insert into empleado(nombre, trabajo, salario)values('Camilo','Soporte',2500);
-
+INSERT INTO empleado (nombre, trabajo,salario) VALUES ('Alberto', 'Programador',0);
+INSERT INTO empleado (nombre, trabajo,salario) VALUES ('Tamy', 'Analista',0);
+INSERT INTO empleado (nombre, trabajo,salario) VALUES ('Hugo', 'Soporte',0);

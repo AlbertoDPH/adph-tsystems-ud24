@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.Empleado;
+import com.example.demo.dto.Trabajo;
 import com.example.demo.service.EmpleadoServiceImple;
 
 @RestController
@@ -28,15 +29,23 @@ public class EmpleadoController {
 		return empleadoServiceImple.listarEmpleados();
 	}
 
-	// Lista empleados por nombre
-//	@GetMapping("/empleados/nombre/{nombre}")
-//	public List<Empleado> listarEmpleadoNombre(@PathVariable(name = "nombre") String nombre) {
-//		return empleadoServiceImple.listarEmpleadoNombre(nombre);
-//
-//	}
+	 //Lista empleados por nombre
+	@GetMapping("/empleados/nombre/{nombre}")
+	public List<Empleado> listarEmpleadoNombre(@PathVariable(name = "nombre") String nombre) {
+		return empleadoServiceImple.listarEmpleadoNombre(nombre);
+
+	}
+
+	@GetMapping("/empleados/trabajo/{trabajo}")
+	public List<Empleado> listarEmpleadoPorTrabajo(@PathVariable(name = "trabajo") Trabajo trabajo) {
+		return empleadoServiceImple.listarEmpleadoPorTrabajo(trabajo);
+	}
 
 	@PostMapping("/empleados")
 	public Empleado salvarEmpleado(@RequestBody Empleado empleado) {
+		// Asignar salario automaticamente segun el trabajo
+		
+		empleado.setSalario(Double.valueOf(empleado.getTrabajo().getSalario()));
 		return empleadoServiceImple.guardarEmpleado(empleado);
 	}
 
@@ -63,9 +72,9 @@ public class EmpleadoController {
 		empleado_seleccionado.setNombre(empleado.getNombre());
 		empleado_seleccionado.setTrabajo(empleado.getTrabajo());
 		empleado_seleccionado.setSalario(empleado.getSalario());
-		
+
 		empleado_actualizado = empleadoServiceImple.actualizarEmpleado(empleado_seleccionado);
-		
+
 		System.out.println("El empleado actualizado es: " + empleado_actualizado);
 
 		return empleado_actualizado;
